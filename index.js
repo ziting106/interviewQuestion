@@ -13,8 +13,26 @@ const foodList = [
   {value: '9', name: '橙汁芋頭西米露'},
   {value: '10', name: '巧克力榛果塔'}
 ];
+const animalList = [
+  {value: '1', name: '獅子'},
+  {value: '2', name: '老虎'},
+  {value: '3', name: '大象'},
+  {value: '4', name: '長頸鹿'},
+  {value: '5', name: '猴子'},
+  {value: '6', name: '企鵝'}
+];
 
 
-const selectList = document.getElementById('food');
+
+const food = document.getElementById('food');
+const animal = document.getElementById('animal');
+const button = document.getElementById('send');
 // 將select傳給multiple-select
-selectList.data = foodList;
+food.data = foodList;
+animal.data = animalList;
+// 送出表單
+button.addEventListener('click', send.bind(this))
+function send(){
+  console.log('選中的食物:', food.valueArray);
+  console.log('選中的動物:', animal.valueArray);
+}
