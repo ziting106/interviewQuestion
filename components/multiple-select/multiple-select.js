@@ -27,7 +27,7 @@ export class MultipleSelect extends HTMLElement{
     `;
     const selectInput = this.shadowRoot.getElementById("selectInput");
     const selectItem = this.shadowRoot.getElementById("mulSelect");
-    selectInput.addEventListener("click",  isSelectOpen.bind(this,true));
+    selectInput.addEventListener("focus",  isSelectOpen.bind(this,true));
     selectItem.addEventListener("blur",  isSelectOpen.bind(this,false));
     
     function isSelectOpen(status) {
