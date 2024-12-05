@@ -1,23 +1,27 @@
 export class MultipleSelect extends HTMLElement{
+  valueArray = [];
+
   constructor(){
     super();
     // 變數定義
     const selectList = this.getAttribute("selectList") || [{ value:'', name:'--查無資料--'}];
     const placeholder = this.getAttribute("placeholder") || '請選擇';
     const label = this.getAttribute("label") || '欄位標題';
+    // 儲存選取值
     this.attachShadow({ mode: "open" });
 
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="/components/multiple-select/multiple-select.css">
-      <div class="d-flex">
+      <div class="d-flex m-2">
         <label for="mulSelect" class="noWrap">${label}：</label>
         <div class="d-flex flex-direction-column">
-          <select class="ww-200 mulInput" placeholder="${placeholder}" id="selectInput" ></select>
+          <select class="ww-200 mulInput" id="selectInput">
+            <option value="" class="d-none">請選擇</option>
+          </select>
           <select class="ww-200 d-none" name="pets" id="mulSelect" multiple>
             ${selectList.map( item => 
               `<option id="item${item.value}" class="optionUncheck" value="${item.value}">${item.name}</option>`).join("")}
           </select>
-          
         </div>
       </div>
     `;
@@ -45,6 +49,7 @@ export class MultipleSelect extends HTMLElement{
   // 接受傳來的selectList data
   set data(data){
     const selectOption = this.shadowRoot.getElementById("mulSelect");
+    const selectInput = this.shadowRoot.getElementById("selectInput");
     console.log(data);
     selectOption.innerHTML = `${data.map( item => `
       <option id="item${item.value}" class="optionUncheck" value="${item.value}"><p>${item.name}</p></option>
@@ -55,18 +60,31 @@ export class MultipleSelect extends HTMLElement{
       const optionItem = this.shadowRoot.getElementById(`item${item.value}`);
       optionItem.addEventListener('click', isOptionCheck.bind(this, item))
     }
+
     function isOptionCheck(item){
-      console.log(item)
       const optionCheck = this.shadowRoot.getElementById(`item${item.value}`);
       const optionClass = optionCheck.classList;
       // 勾選/不勾選
       if(optionClass.value === 'optionUncheck'){
         optionClass.remove('optionUncheck')
         optionClass.add('optionCheck')
+        this.valueArray.push(item);
+        getItemValue(this.valueArray)
       }else{
         optionClass.remove('optionCheck')
         optionClass.add('optionUncheck')
+        // 找到陣列值所在陣列序並刪除
+        let index = this.valueArray.indexOf(item);
+        if (index !== -1) {
+          this.valueArray.splice(index, 1);
+        }
+        getItemValue(this.valueArray)
       }
+    }
+    // #endregion
+    // #region [📌step3: 即時更變欄位名稱]
+    function getItemValue(array){
+      selectInput.innerHTML = `<option class="d-none">${array.map(value => value.name).join('、')}</option>`
     }
     // #endregion
   }

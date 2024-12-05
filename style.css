@@ -1,3 +1,4 @@
+/* 共用Style命名參考Bootstrap */
 .d-flex{
   display: flex;
 }
@@ -15,14 +16,8 @@ input{
 .noWrap{
   white-space: noWrap;
 }
-.w-100{
-  width: 100%;
-}
-.w-80{
-  width: 80%;
-}
-.w-20{
-  width: 20%;
+.m-2{
+  margin:10px;
 }
 .ww-200{
   width: 250px;
