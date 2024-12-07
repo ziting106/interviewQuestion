@@ -9,8 +9,12 @@
 
 
 ## 參考資料：
+
 [**How to Create a Styled Table with Web Components — JavaScript Tutorial**](https://youtu.be/ggtL1rxpx8c?si=DEsGzZXCIXwUTaFj)
+
 [**Angular Material**](https://material.angular.io/components/select/examples)
+
 [css3中content特殊字符列表](https://huanghui8030.github.io/css/content.html)
+
 [純JS下拉多選單範例](https://blog.shiangsoft.com/javascript-multiselector/)
 
