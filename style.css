@@ -5,6 +5,9 @@
 .flex-direction-column{
   flex-direction: column;
 }
+.text-align-center{
+  text-align: center;
+}
 .d-none{
   display: none;
 }
@@ -21,4 +24,11 @@ input{
 }
 .ww-200{
   width: 250px;
+}
+/* -------------- */
+.detailForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
 }

@@ -61,23 +61,35 @@ export class MultipleSelect extends HTMLElement{
       optionItem.addEventListener('click', isOptionCheck.bind(this, item))
     }
 
+    // 勾選/不勾選
     function isOptionCheck(item){
       const optionCheck = this.shadowRoot.getElementById(`item${item.value}`);
       const optionClass = optionCheck.classList;
-      // 勾選/不勾選
       if(optionClass.value === 'optionUncheck'){
         optionClass.remove('optionUncheck')
         optionClass.add('optionCheck')
         this.valueArray.push(item);
+        // 關閉selected狀態以避免灰底常存
+        optionCheck.selected = false;
+        // 將陣列依照value順序排列
+        this.valueArray.sort((a, b) => a.value - b.value);
+        console.log(this.valueArray)
+        // 即時更變欄位名稱
         getItemValue(this.valueArray)
       }else{
         optionClass.remove('optionCheck')
         optionClass.add('optionUncheck')
+        // 關閉selected狀態以避免灰底常存
+        optionCheck.selected = false;
         // 找到陣列值所在陣列序並刪除
         let index = this.valueArray.indexOf(item);
         if (index !== -1) {
           this.valueArray.splice(index, 1);
         }
+        // 將陣列依照value順序排列
+        this.valueArray.sort((a, b) => a.value - b.value);
+        console.log(this.valueArray)
+        // 即時更變欄位名稱
         getItemValue(this.valueArray)
       }
     }

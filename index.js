@@ -33,6 +33,5 @@ animal.data = animalList;
 // 送出表單
 button.addEventListener('click', send.bind(this))
 function send(){
-  console.log('選中的食物:', food.valueArray);
-  console.log('選中的動物:', animal.valueArray);
+  alert('送出成功！'+'\n選中的食物:'+food.valueArray.map((i)=>i.name)+'\n選中的動物:'+animal.valueArray.map((i)=>i.name));
 }
